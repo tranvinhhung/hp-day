@@ -19,7 +19,9 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: cursive;
+  font-weight: 400;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -49,7 +51,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Arial", sans-serif;
   color: white;
   overflow: hidden;
 }
@@ -59,6 +60,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  font-family: cursive;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,7 +82,11 @@ body {
   bottom: -150px;
   width: 40px;
   height: 50px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 100, 100, 0.8));
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 100, 100, 0.8)
+  );
   border-radius: 50%;
   animation: floatUp 8s linear infinite;
 }
@@ -116,6 +122,10 @@ body {
   display: inline-block;
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 73%;
 }
 
 .word {
@@ -134,9 +144,10 @@ body {
 
 .detailed-message {
   font-size: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+  padding: 1px;
 }
 
 @keyframes bounceIn {
@@ -171,7 +182,8 @@ body {
   width: 100px;
   height: 100px;
   opacity: 0;
-  animation: showAndHideImage 2s ease-in-out forwards, sparkle 1.5s infinite alternate;
+  animation: showAndHideImage 2s ease-in-out forwards,
+    sparkle 1.5s infinite alternate;
 }
 
 @keyframes showAndHideImage {
@@ -208,6 +220,7 @@ body {
   .container {
     display: flex;
     flex-direction: column;
+    font-family: cursive;
   }
 
   .word {
@@ -305,7 +318,6 @@ body {
   display: inline-block;
   object-position: cover;
   object-position: center center;
- 
 }
 
 @keyframes moveUp {
@@ -317,5 +329,37 @@ body {
   }
   100% {
     bottom: 20px; /* Final position */
+  }
+}
+
+/* Container chứa tuyết */
+.snowflakes-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Để không cản trở người dùng tương tác */
+  overflow: hidden;
+  z-index: 10; /* Đặt phía trên các nội dung khác */
+}
+
+/* Các bông tuyết */
+.snowflake {
+  position: absolute;
+  top: -10px; /* Bắt đầu từ phía trên màn hình */
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: fall linear infinite; /* Hiệu ứng rơi */
+}
+
+/* Hiệu ứng rơi */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect,useCallback,useRef  } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import cat from "../../public/cat.webp";
 import ilu from "../../public/iloveu.jpeg";
@@ -13,11 +13,11 @@ const App = () => {
   const [isClient, setIsClient] = useState(false); // To ensure content is rendered on the client
   const [showCat, setShowCat] = useState(false); // To show cat after message is typed
 
-  const message = "Happy Birthday em Bé iu Tờ Hiên 🎉";
+  const message = "Happy Birthday em bé Tờ Hiên 🎉❤️🎂";
   const words = message.split(" "); // Split message into words
 
   const fullMessage =
-    "Chúc em có một tuổi mới ngày càng thương ta hơn, iu thương ta về sớm chơi với dinhhung, Dinhhung chúc tất cả mọi thứ tốt đẹp cho em, hun em chụt chụt. Happy Birthday Em! 🎉";
+    "Chúc em có một tuổi mới ngày càng thương ta hơn, iu thương ta về sớm chơi với dinhhung, Dinhhung chúc tất cả mọi thứ tốt đẹp cho em, hun em chụt chụt ❤️. Happy Birthday Em!🎉";
 
   const imageList = [
     "https://plus.unsplash.com/premium_vector-1723038733000-ff4ec25c7138?q=80&w=3600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -73,8 +73,6 @@ const App = () => {
     }, 3000);
   }, []);
 
-
-
   const createBalloons = () => {
     const balloonContainer = document.querySelector(".balloons-container");
     for (let i = 0; i < 30; i++) {
@@ -94,7 +92,7 @@ const App = () => {
     if (audio) {
       audio.muted = true; // Bắt đầu phát ở chế độ tắt tiếng
       const playPromise = audio.play();
-  
+
       if (playPromise !== undefined) {
         playPromise
           .then(() => {
@@ -110,7 +108,7 @@ const App = () => {
       }
     }
   };
-  
+
   useEffect(() => {
     playBirthdaySong(); // Gọi play khi trang vừa tải
   }, []);
@@ -120,18 +118,16 @@ const App = () => {
     if (audio) {
       const playPromise = audio.play();
       if (playPromise !== undefined) {
-        playPromise
-          .catch(() => {
-            alert("Hãy nhấp vào màn hình để nghe nhạc!");
-          });
+        playPromise.catch(() => {
+          alert("Hãy nhấp vào màn hình để nghe nhạc!");
+        });
       }
     }
   };
-  
+
   useEffect(() => {
     requestAudioPermission();
   }, []);
-
 
   const playAudio = () => {
     const audio = audioRef.current;
@@ -145,8 +141,35 @@ const App = () => {
     }
   };
 
+  const createSnowflakes = () => {
+    const snowflakeContainer = document.querySelector(".snowflakes-container");
+    for (let i = 0; i < 50; i++) {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+  
+      // Vị trí ngang ngẫu nhiên
+      snowflake.style.left = `${Math.random() * 100}%`;
+  
+      // Kích thước ngẫu nhiên
+      const size = Math.random() * 10 + 5; // Kích thước từ 5px đến 15px
+      snowflake.style.width = `${size}px`;
+      snowflake.style.height = `${size}px`;
+  
+      // Thời gian rơi ngẫu nhiên
+      snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`; // Từ 2s đến 5s
+      snowflake.style.animationDelay = `${Math.random() * 5}s`; // Ngẫu nhiên thời gian bắt đầu
+  
+      snowflakeContainer.appendChild(snowflake);
+    }
+  };
+  
+  useEffect(() => {
+    createSnowflakes();
+  }, []);
+
   return (
-    <div className="container"  onClick={playAudio}>
+    <div className="container" onClick={playAudio}>
+      <div className="snowflakes-container"></div>
       <div className="balloons-container"></div>
       <div className="animated-text">
         {words.map((word, index) => (
@@ -154,10 +177,6 @@ const App = () => {
             key={index}
             className="word"
             style={{ animationDelay: `${index * 0.3}s` }}
-            onClick={() => {
-              showMS();
-              playBirthdaySong(); // Play the audio when a word is clicked
-            }}
           >
             {word}
           </span>
